@@ -1,3 +1,7 @@
+package com.studyflow.entity;
+
+import com.studyflow.entity.Categoria;
+import com.studyflow.entity.Materia;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -106,4 +110,3 @@ public class Tarefa {
         this.categoria = categoria;
     }
 }
-EOF
