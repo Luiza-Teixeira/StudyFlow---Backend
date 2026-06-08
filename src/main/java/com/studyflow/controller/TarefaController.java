@@ -1,6 +1,7 @@
 package com.studyflow.controller;
 
-import com.studyflow.entity.Tarefa;
+import com.studyflow.dto.TarefaRequestDTO;
+import com.studyflow.dto.TarefaResponseDTO;
 import com.studyflow.service.TarefaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,9 @@ public class TarefaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody Tarefa tarefa) {
+    public ResponseEntity<?> criar(@RequestBody TarefaRequestDTO dto) {
         try {
-            Tarefa novaTarefa = tarefaService.salvarTarefa(tarefa);
+            TarefaResponseDTO novaTarefa = tarefaService.salvarTarefa(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -29,14 +30,14 @@ public class TarefaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Tarefa>> listar() {
-        List<Tarefa> tarefas = tarefaService.listarTodas();
+    public ResponseEntity<List<TarefaResponseDTO>> listar() {
+        List<TarefaResponseDTO> tarefas = tarefaService.listarTodas();
         return ResponseEntity.ok(tarefas);
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<Tarefa>> listarPorStatus(@PathVariable String status) {
-        List<Tarefa> tarefas = tarefaService.listarPorStatus(status);
+    public ResponseEntity<List<TarefaResponseDTO>> listarPorStatus(@PathVariable String status) {
+        List<TarefaResponseDTO> tarefas = tarefaService.listarPorStatus(status);
         return ResponseEntity.ok(tarefas);
     }
 }
